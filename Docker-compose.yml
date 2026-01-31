@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  frontend:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      NEXT_PUBLIC_TRANSACTION_API_URL: http://localhost:9000/Transactions
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+
+  backend:
+    build: ./backend
+    ports:
+      - "9000:9000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: mysql://root:SuperUser@db:3306/Budget
+    volumes:
+      - ./backend/:/app
+      - /app/node_modules
+    command: sh -c "npx prisma migrate deploy && npm run dev"
+
+  db:
+    image: mysql:8.1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: SuperUser
+      MYSQL_DATABASE: Budget
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
