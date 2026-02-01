@@ -9,6 +9,7 @@ services:
       - backend
     environment:
       NEXT_PUBLIC_TRANSACTION_API_URL: http://localhost:9000/Transactions
+      NEXT_PUBLIC_AUTH_API_URL: http:/localhost:9000/Auth
     volumes:
       - ./client:/app
       - /app/node_modules
@@ -21,6 +22,8 @@ services:
       - db
     environment:
       DATABASE_URL: mysql://root:SuperUser@db:3306/Budget
+      SERVER_PORT: 9000
+      JWT_SECRET: sduwhduwhduwhdiuwd112
     volumes:
       - ./backend/:/app
       - /app/node_modules

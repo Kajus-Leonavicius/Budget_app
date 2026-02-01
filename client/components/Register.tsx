@@ -14,7 +14,7 @@ function Register() {
 
 const handleLogin = async() =>{
     try{
-        const res = await axios.post('http://localhost:9000/auth/login', {
+        const res = await axios.post(process.env.NEXT_PUBLIC_AUTH_API_URL + '/login', {
             email: user.email,
             password: user.password
         },{

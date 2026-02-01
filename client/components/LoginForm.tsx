@@ -15,7 +15,7 @@ export default function LoginForm({setLogin}: LoginFormProps) {
 
     const handleSubmit = async() =>{
         try{
-            const res = await axios.post('http://localhost:9000/auth/register', {
+            const res = await axios.post(process.env.NEXT_PUBLIC_AUTH_API_URL + `/register`, {
                 name: user.name,
                 surname: user.surname,
                 email: user.email,
