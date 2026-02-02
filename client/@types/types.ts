@@ -16,3 +16,14 @@ export type Details = {
     category: string
     amount: number
 }
+
+export type user = {
+    id?: number
+    name?: string
+    surname?: string
+    email?: string
+    balance?: number
+    savings?: number
+    monthlyIncome?: number 
+    monthlyExpenses?: number
+}

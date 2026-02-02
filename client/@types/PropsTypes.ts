@@ -8,8 +8,8 @@ export type buttonProps = {
 
 export type WidgetProps = {
     title: string
-    data: number
-    info?: string
+    data?: number
+    info?: string | null
 }
 
 export type LoginFormProps = {

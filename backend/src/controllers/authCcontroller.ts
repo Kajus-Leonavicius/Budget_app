@@ -11,13 +11,15 @@ export type user = {
     name: string,
     surname: string
     email: string
+    savings: number,
+    balance: number
 }
 export interface AuthRequest extends Request {
     user?: user
 }
 
 //middleware function to chech if auth token is valid
-export const authToken = (req: AuthRequest, res: Response, next: NextFunction) => {
+export const authToken = async (req: AuthRequest, res: Response, next: NextFunction) => {
     //get authHeader
     //const authHeader = req.headers['authorization']
     
@@ -41,12 +43,23 @@ export const authToken = (req: AuthRequest, res: Response, next: NextFunction) =
         //! means token will be 100% string
         const decodedToken = jwt.verify(token!, process.env.JWT_SECRET) as any
 
-        req.user = {
-            id: decodedToken.id,
-            name: decodedToken.name,
-            surname: decodedToken.surname,
-            email: decodedToken.email
+        const user = await prisma.users.findUnique({
+            where:{id: decodedToken.id},
+            select:{
+                id: true,
+                name: true,
+                surname: true,
+                email: true,
+                balance: true,
+                savings: true
+            }
+        })
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
         }
+
+        req.user = user
 
         console.log(req.user)
         next()
@@ -117,8 +130,10 @@ export const login = async (req: Request, res: Response) => {
 
         res.cookie('token', token,{
             httpOnly: true,
-            secure: false,
-            sameSite: 'lax',
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+            path: '/',
+            domain: process.env.DOMAIN,
             maxAge: 60*60*1000
         })
 
