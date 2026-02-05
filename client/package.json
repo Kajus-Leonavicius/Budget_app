@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
+    "@mui/x-charts": "^8.27.0",
     "axios": "^1.13.3",
     "dotenv": "^17.2.3",
     "next": "16.1.4",

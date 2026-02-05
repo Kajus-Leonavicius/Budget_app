@@ -22,7 +22,7 @@ const handleLogin = async() =>{
         })
 
         if(res.status === 200){
-            router.push('/Transactions')
+            router.push('/dashboard')
         }
     }catch(e){
         console.log(e)

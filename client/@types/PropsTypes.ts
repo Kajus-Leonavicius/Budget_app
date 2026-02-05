@@ -7,9 +7,10 @@ export type buttonProps = {
 }
 
 export type WidgetProps = {
-    title: string
+    title?: string
     data?: number
     info?: string | null
+    children?: React.ReactNode
 }
 
 export type LoginFormProps = {

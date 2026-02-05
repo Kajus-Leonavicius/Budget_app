@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser'
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: [process.env.FRONTEND!, '192.168.1.11:3000'],
+    origin: [process.env.FRONTEND!, '192.168.1.94:3000'],
     credentials: true
 }))
 app.use(cookieParser())

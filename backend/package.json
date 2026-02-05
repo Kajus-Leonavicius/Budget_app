@@ -25,6 +25,7 @@
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@google/genai": "^1.40.0",
     "@prisma/adapter-mariadb": "^7.3.0",
     "@prisma/client": "^6.19.2",
     "bcrypt": "^6.0.0",
